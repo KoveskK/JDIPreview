@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JDI AutoHaus | Performance. Precision. Passion.</title>
+  <meta name="description" content="Premium automotive servicing & bespoke car care. JDI AutoHaus specialises in quality servicing, brake work, diagnostics, detailing, and performance-focused care.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'jdi-red': '#DC2626',
+            'jdi-red-dark': '#B91C1C',
+            'jdi-silver': '#A8A8A8',
+            'jdi-silver-light': '#D4D4D4',
+            'jdi-dark': '#080808',
+            'jdi-charcoal': '#141414',
+            'jdi-charcoal-light': '#1E1E1E',
+          },
+          fontFamily: {
+            heading: ['system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+            body: ['system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #080808; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+    .animate-delay-100 { animation-delay: 0.1s; }
+    .animate-delay-200 { animation-delay: 0.2s; }
+    .animate-delay-300 { animation-delay: 0.3s; }
+    .animate-delay-400 { animation-delay: 0.4s; }
+
+    /* Service card glow on hover */
+    .service-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(220, 38, 38, 0.15), 0 0 40px rgba(220, 38, 38, 0.05);
+    }
+
+    /* Gallery overlay */
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+    .gallery-item img {
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Navbar transition */
+    .nav-scrolled {
+      background: rgba(8, 8, 8, 0.95) !important;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(168, 168, 168, 0.1);
+    }
+
+    /* Button hover */
+    .btn-primary {
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #B91C1C;
+      box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+    }
+    .btn-outline {
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: rgba(168, 168, 168, 0.1);
+      border-color: #D4D4D4;
+    }
+
+    /* Section divider */
+    .section-line {
+      width: 60px;
+      height: 3px;
+      background: #DC2626;
+    }
+  </style>
+</head>
+
+<body class="bg-jdi-dark text-white font-body">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded border-2 border-jdi-red flex items-center justify-center">
+            <span class="text-jdi-red font-bold text-lg tracking-tighter">JDI</span>
+          </div>
+          <div class="hidden sm:block">
+            <span class="text-white font-bold text-xl tracking-wide">AUTO</span><span class="text-jdi-silver font-light text-xl tracking-wide">HAUS</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase">About</a>
+          <a href="#services" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase">Services</a>
+          <a href="#work" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase">Gallery</a>
+          <a href="#contact" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase">Contact</a>
+          <a href="https://www.instagram.com/jdiautohaus/" target="_blank" rel="noopener noreferrer" class="text-jdi-silver hover:text-white transition-colors" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Toggle mobile menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-6">
+        <div class="flex flex-col gap-4 pt-4 border-t border-white/10">
+          <a href="#about" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase mobile-nav-link">About</a>
+          <a href="#services" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase mobile-nav-link">Services</a>
+          <a href="#work" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase mobile-nav-link">Gallery</a>
+          <a href="#contact" class="text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase mobile-nav-link">Contact</a>
+          <a href="https://www.instagram.com/jdiautohaus/" target="_blank" rel="noopener noreferrer" class="text-jdi-silver hover:text-white transition-colors inline-flex items-center gap-2 text-sm tracking-widest uppercase">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img src="images/hero.jpg" alt="Premium luxury performance car" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-jdi-dark via-transparent to-transparent"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left w-full">
+      <div class="max-w-3xl">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-jdi-red/30 bg-jdi-red/5 mb-8 animate-fade-in">
+          <span class="w-2 h-2 rounded-full bg-jdi-red animate-pulse"></span>
+          <span class="text-jdi-silver text-xs tracking-[0.2em] uppercase">Premium Automotive Care</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold leading-none tracking-tight mb-6 animate-fade-in-up">
+          <span class="text-white">Performance.</span><br>
+          <span class="text-jdi-silver">Precision.</span><br>
+          <span class="text-jdi-red">Passion.</span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="text-lg sm:text-xl text-jdi-silver font-light leading-relaxed mb-10 max-w-xl animate-fade-in-up animate-delay-200">
+          Premium automotive servicing &amp; bespoke car care.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 animate-fade-in-up animate-delay-300">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2 bg-jdi-red text-white px-8 py-4 rounded font-semibold text-sm tracking-widest uppercase">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Book Service
+          </a>
+          <a href="#work" class="btn-outline inline-flex items-center gap-2 border border-jdi-silver/30 text-jdi-silver px-8 py-4 rounded font-semibold text-sm tracking-widest uppercase">
+            View Our Work
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="https://www.instagram.com/jdiautohaus/" target="_blank" rel="noopener noreferrer" class="btn-outline inline-flex items-center gap-2 border border-jdi-silver/30 text-jdi-silver p-4 rounded transition-colors hover:text-white" aria-label="Follow us on Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-jdi-silver/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT SECTION ==================== -->
+  <section id="about" class="py-24 sm:py-32 bg-jdi-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="text-jdi-red text-xs tracking-[0.3em] uppercase font-semibold">Who We Are</span>
+          <h2 class="text-4xl sm:text-5xl font-bold text-white mt-4 mb-6 leading-tight">
+            Driven by <span class="text-jdi-silver">Excellence</span>
+          </h2>
+          <div class="section-line mb-8"></div>
+          <p class="text-jdi-silver leading-relaxed text-lg mb-6">
+            JDI AutoHaus specialises in high-quality automotive servicing, brake work, diagnostics, detailing and performance-focused care.
+          </p>
+          <p class="text-jdi-silver/70 leading-relaxed">
+            Built on passion and precision, every vehicle is treated like our own. We combine years of hands-on experience with a deep respect for the machines we work on, delivering results that speak for themselves.
+          </p>
+          <div class="mt-10 grid grid-cols-3 gap-8">
+            <div>
+              <div class="text-3xl font-bold text-white">500<span class="text-jdi-red">+</span></div>
+              <div class="text-jdi-silver/60 text-sm mt-1">Cars Serviced</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-white">100<span class="text-jdi-red">%</span></div>
+              <div class="text-jdi-silver/60 text-sm mt-1">Satisfaction</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-white">5<span class="text-jdi-red">&#9733;</span></div>
+              <div class="text-jdi-silver/60 text-sm mt-1">Rated Service</div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-square rounded-lg overflow-hidden border border-white/5">
+            <img src="images/gallery-1.jpg" alt="JDI AutoHaus precision engine work" class="w-full h-full object-cover">
+          </div>
+          <div class="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-jdi-red/20 rounded-lg"></div>
+          <div class="absolute -top-6 -right-6 w-32 h-32 border-2 border-jdi-silver/10 rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES SECTION ==================== -->
+  <section id="services" class="py-24 sm:py-32 bg-jdi-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <span class="text-jdi-red text-xs tracking-[0.3em] uppercase font-semibold">What We Do</span>
+        <h2 class="text-4xl sm:text-5xl font-bold text-white mt-4 mb-6">Our Services</h2>
+        <div class="section-line mx-auto mb-6"></div>
+        <p class="text-jdi-silver max-w-2xl mx-auto text-lg">
+          From routine maintenance to performance upgrades, we deliver precision care for every vehicle.
+        </p>
+      </div>
+
+      <!-- Service Cards -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div class="service-card bg-jdi-dark border border-white/5 rounded-lg p-8 text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-jdi-red/10 flex items-center justify-center">
+            <svg class="w-8 h-8 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Minor Servicing &amp; Inspections</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed mb-6">
+            Comprehensive checks and routine maintenance to keep your vehicle running at its best.
+          </p>
+          <a href="#contact" class="inline-block text-jdi-red text-sm font-semibold tracking-widest uppercase hover:text-white transition-colors">
+            Book Now &rarr;
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card bg-jdi-dark border border-white/5 rounded-lg p-8 text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-jdi-red/10 flex items-center justify-center">
+            <svg class="w-8 h-8 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Brakes &amp; Suspension</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed mb-6">
+            Expert brake and suspension work for safer handling and peak stopping performance.
+          </p>
+          <a href="#contact" class="inline-block text-jdi-red text-sm font-semibold tracking-widest uppercase hover:text-white transition-colors">
+            Book Now &rarr;
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card bg-jdi-dark border border-white/5 rounded-lg p-8 text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-jdi-red/10 flex items-center justify-center">
+            <svg class="w-8 h-8 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Diagnostics &amp; Tune-Ups</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed mb-6">
+            Advanced diagnostics and precision tuning to identify issues and maximise performance.
+          </p>
+          <a href="#contact" class="inline-block text-jdi-red text-sm font-semibold tracking-widest uppercase hover:text-white transition-colors">
+            Book Now &rarr;
+          </a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="service-card bg-jdi-dark border border-white/5 rounded-lg p-8 text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-jdi-red/10 flex items-center justify-center">
+            <svg class="w-8 h-8 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Interior &amp; Exterior Detailing</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed mb-6">
+            Meticulous detailing inside and out to restore your vehicle to showroom condition.
+          </p>
+          <a href="#contact" class="inline-block text-jdi-red text-sm font-semibold tracking-widest uppercase hover:text-white transition-colors">
+            Book Now &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GALLERY SECTION ==================== -->
+  <section id="work" class="py-24 sm:py-32 bg-jdi-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <span class="text-jdi-red text-xs tracking-[0.3em] uppercase font-semibold">Portfolio</span>
+        <h2 class="text-4xl sm:text-5xl font-bold text-white mt-4 mb-6">Our Work</h2>
+        <div class="section-line mx-auto mb-6"></div>
+        <p class="text-jdi-silver max-w-2xl mx-auto text-lg">
+          A selection of vehicles we have had the privilege of working on.
+        </p>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="gallery-item relative aspect-square rounded-lg overflow-hidden cursor-pointer">
+          <img src="images/gallery-1.jpg" alt="Engine bay detail work at JDI AutoHaus" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item relative aspect-square rounded-lg overflow-hidden cursor-pointer">
+          <img src="images/gallery-2.jpg" alt="Professional car detailing in progress" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item relative aspect-square rounded-lg overflow-hidden cursor-pointer">
+          <img src="images/gallery-3.jpg" alt="High-performance brake system" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item relative aspect-square rounded-lg overflow-hidden cursor-pointer">
+          <img src="images/gallery-4.jpg" alt="Premium leather interior detailing" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item relative aspect-square rounded-lg overflow-hidden cursor-pointer">
+          <img src="images/gallery-5.jpg" alt="Advanced vehicle diagnostics" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item relative aspect-square rounded-lg overflow-hidden cursor-pointer">
+          <img src="images/gallery-6.jpg" alt="Performance car rear styling" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Instagram CTA -->
+      <div class="text-center mt-12">
+        <a href="https://www.instagram.com/jdiautohaus/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 text-jdi-silver hover:text-white transition-colors text-sm tracking-widest uppercase">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Follow us on Instagram
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHY CHOOSE US ==================== -->
+  <section class="py-24 sm:py-32 bg-jdi-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <span class="text-jdi-red text-xs tracking-[0.3em] uppercase font-semibold">The Difference</span>
+        <h2 class="text-4xl sm:text-5xl font-bold text-white mt-4 mb-6">Why Choose Us</h2>
+        <div class="section-line mx-auto"></div>
+      </div>
+
+      <!-- 4 Columns -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Column 1 -->
+        <div class="text-center p-6">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-jdi-red/30 flex items-center justify-center">
+            <svg class="w-10 h-10 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Experienced Technicians</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed">
+            Skilled professionals with deep expertise across all vehicle makes and models.
+          </p>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="text-center p-6">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-jdi-red/30 flex items-center justify-center">
+            <svg class="w-10 h-10 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Honest Pricing</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed">
+            Transparent quotes with no hidden fees. You only pay for what your vehicle needs.
+          </p>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="text-center p-6">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-jdi-red/30 flex items-center justify-center">
+            <svg class="w-10 h-10 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Attention to Detail</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed">
+            Every bolt, every panel, every finish inspected with meticulous care and precision.
+          </p>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="text-center p-6">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-jdi-red/30 flex items-center justify-center">
+            <svg class="w-10 h-10 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-3">Passion for Performance</h3>
+          <p class="text-jdi-silver/70 text-sm leading-relaxed">
+            We are car enthusiasts first. Your vehicle gets the love and care it truly deserves.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT SECTION ==================== -->
+  <section id="contact" class="py-24 sm:py-32 bg-jdi-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16">
+        <!-- Left: Info -->
+        <div>
+          <span class="text-jdi-red text-xs tracking-[0.3em] uppercase font-semibold">Get in Touch</span>
+          <h2 class="text-4xl sm:text-5xl font-bold text-white mt-4 mb-6">
+            Let's Talk <span class="text-jdi-silver">Cars</span>
+          </h2>
+          <div class="section-line mb-8"></div>
+          <p class="text-jdi-silver leading-relaxed text-lg mb-10">
+            Ready to book a service or have a question? Reach out and we'll get back to you as soon as possible.
+          </p>
+
+          <div class="space-y-6">
+            <!-- Phone -->
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-jdi-charcoal-light flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              </div>
+              <div>
+                <div class="text-jdi-silver/60 text-sm">Phone</div>
+                <div class="text-white font-medium">0400 000 000</div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-jdi-charcoal-light flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <div class="text-jdi-silver/60 text-sm">Email</div>
+                <div class="text-white font-medium">info@jdiautohaus.com.au</div>
+              </div>
+            </div>
+
+            <!-- Instagram -->
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-jdi-charcoal-light flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-jdi-red" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </div>
+              <div>
+                <div class="text-jdi-silver/60 text-sm">Instagram</div>
+                <a href="https://www.instagram.com/jdiautohaus/" target="_blank" rel="noopener noreferrer" class="text-white font-medium hover:text-jdi-red transition-colors">@jdiautohaus</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="bg-jdi-charcoal border border-white/5 rounded-lg p-8 sm:p-10">
+          <form id="contact-form" onsubmit="handleSubmit(event)">
+            <div class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm text-jdi-silver mb-2 tracking-wide">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your full name"
+                  class="w-full px-4 py-3 bg-jdi-dark border border-white/10 rounded text-white placeholder-jdi-silver/40 focus:outline-none focus:border-jdi-red/50 focus:ring-1 focus:ring-jdi-red/50 transition-colors">
+              </div>
+              <div>
+                <label for="email" class="block text-sm text-jdi-silver mb-2 tracking-wide">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com"
+                  class="w-full px-4 py-3 bg-jdi-dark border border-white/10 rounded text-white placeholder-jdi-silver/40 focus:outline-none focus:border-jdi-red/50 focus:ring-1 focus:ring-jdi-red/50 transition-colors">
+              </div>
+              <div>
+                <label for="phone" class="block text-sm text-jdi-silver mb-2 tracking-wide">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="0400 000 000"
+                  class="w-full px-4 py-3 bg-jdi-dark border border-white/10 rounded text-white placeholder-jdi-silver/40 focus:outline-none focus:border-jdi-red/50 focus:ring-1 focus:ring-jdi-red/50 transition-colors">
+              </div>
+              <div>
+                <label for="message" class="block text-sm text-jdi-silver mb-2 tracking-wide">Message</label>
+                <textarea id="message" name="message" rows="4" required placeholder="Tell us about your vehicle and what you need..."
+                  class="w-full px-4 py-3 bg-jdi-dark border border-white/10 rounded text-white placeholder-jdi-silver/40 focus:outline-none focus:border-jdi-red/50 focus:ring-1 focus:ring-jdi-red/50 transition-colors resize-none"></textarea>
+              </div>
+              <button type="submit" class="btn-primary w-full bg-jdi-red text-white py-4 rounded font-semibold text-sm tracking-widest uppercase">
+                Send Message
+              </button>
+            </div>
+          </form>
+          <div id="form-success" class="hidden text-center py-12">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-jdi-red/10 flex items-center justify-center">
+              <svg class="w-8 h-8 text-jdi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="text-white font-bold text-xl mb-2">Message Sent!</h3>
+            <p class="text-jdi-silver">We'll get back to you as soon as possible.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-jdi-charcoal border-t border-white/5 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded border-2 border-jdi-red flex items-center justify-center">
+            <span class="text-jdi-red font-bold text-sm tracking-tighter">JDI</span>
+          </div>
+          <span class="text-white font-bold tracking-wide">AUTO</span><span class="text-jdi-silver font-light tracking-wide">HAUS</span>
+        </div>
+
+        <!-- Links -->
+        <div class="flex items-center gap-6">
+          <a href="https://www.instagram.com/jdiautohaus/" target="_blank" rel="noopener noreferrer" class="text-jdi-silver hover:text-white transition-colors" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="text-jdi-silver hover:text-white transition-colors" aria-label="Back to top">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+          </a>
+        </div>
+
+        <!-- Copyright -->
+        <p class="text-jdi-silver/50 text-sm">&copy; 2026 JDI AutoHaus. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Form submission
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contact-form').classList.add('hidden');
+      document.getElementById('form-success').classList.remove('hidden');
+    }
+
+    // Scroll animation observer
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(20px)';
+      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(section);
+    });
+
+    // Make hero visible immediately
+    document.getElementById('hero').style.opacity = '1';
+    document.getElementById('hero').style.transform = 'translateY(0)';
+  </script>
+
+</body>
+</html>
